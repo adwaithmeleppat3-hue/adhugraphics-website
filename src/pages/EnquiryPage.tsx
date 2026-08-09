@@ -3,12 +3,12 @@ import ClientNav from '../components/ClientNav'
 import { useApp } from '../App'
 
 const DESIGN_TYPES = [
-  'Pooram Poster',
-  'Event Poster',
+  'pooram poster',
+  'pooram flex',
   'Social Media Design',
-  'Announcement',
-  'Banner',
-  'Festival Branding',
+  'comming soon poster',
+  'logo',
+  'media partner poster',
   'Other',
 ]
 
@@ -105,11 +105,13 @@ export default function EnquiryPage() {
   const handleWhatsApp = () => {
     const msg = buildMessage(form)
     const encoded = encodeURIComponent(msg)
-    const number = whatsapp.replace(/\D/g, '')
-    const url = number
-      ? `https://wa.me/${number}?text=${encoded}`
-      : `https://wa.me/?text=${encoded}`
-    window.open(url, '_blank')
+
+    // AdhuGraphics WhatsApp number (India country code +91).
+    // Keep this as digits only for the wa.me URL.
+    const whatsappNumber = '919072265977'
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encoded}`
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   if (step === 'confirm') {
