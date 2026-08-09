@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useAuth } from '../components/AuthProvider'
 import { useApp, type AvailStatus } from '../App'
 import BrandLogo from '../components/BrandLogo'
 
@@ -186,8 +187,9 @@ function AdminCalendar() {
   )
 }
 
-export default function AdminPage() {
+function AdminDashboard() {
   const { theme, toggleTheme, nav, whatsapp, setWhatsapp } = useApp()
+  const { user, signOut } = useAuth()
   const [tab, setTab] = useState<AdminTab>('dashboard')
   const [wNumber, setWNumber] = useState(whatsapp)
   const [defaultTheme, setDefaultTheme] = useState<'light' | 'dark' | 'system'>('system')
@@ -260,6 +262,12 @@ export default function AdminPage() {
             {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
           </button>
           <button
+            onClick={() => { void signOut() }}
+            style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px', borderRadius: 8, border: 'none', background: 'transparent', color: '#8B0000', fontSize: 13, fontWeight: 600, cursor: 'pointer', width: '100%', textAlign: 'left' }}
+          >
+            <span>↪</span> Logout
+          </button>
+          <button
             onClick={() => nav('portfolio')}
             style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 12px', borderRadius: 8, border: 'none', background: 'transparent', color: 'var(--c-muted)', fontSize: 13, fontWeight: 500, cursor: 'pointer', width: '100%', textAlign: 'left' }}
           >
@@ -275,7 +283,7 @@ export default function AdminPage() {
         {tab === 'dashboard' && (
           <div>
             <h1 className="font-display" style={{ fontSize: 32, fontWeight: 400, margin: '0 0 4px', color: 'var(--c-text)' }}>
-              Welcome back, Adhu 👋
+              {user?.email ? `Welcome back, ${user.email.split('@')[0]} 👋` : 'Welcome back 👋'}
             </h1>
             <p style={{ color: 'var(--c-muted)', fontSize: 14, marginBottom: 32 }}>Here is what is happening with your projects today.</p>
 
@@ -599,4 +607,9 @@ function ActionLink({ label, onClick, green, danger }: { label: string; onClick?
       {label}
     </button>
   )
+}
+
+
+export default function AdminPage() {
+  return <AdminDashboard />
 }
