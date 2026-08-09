@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Pangram Sans Rounded';
+  src: url('./fonts/PPPangramSansRounded-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import 'tailwindcss';
 
 @custom-variant dark (&:is(.dark, .dark *));
@@ -35,7 +42,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pangram Sans Rounded', sans-serif;
   background-color: var(--c-bg);
   color: var(--c-text);
   margin: 0;
@@ -54,7 +61,7 @@ html.dark body {
 button, input, textarea, select { font: inherit; }
 
 .font-display {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Pangram Sans Rounded', sans-serif;
 }
 
 .brand-logo {
